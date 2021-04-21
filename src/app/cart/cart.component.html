@@ -1,1 +1,38 @@
-<p>cart works!</p>
+<h1>My Cart</h1>
+<ng-container *ngIf="cartItems.length > 0 ; else elseTemplate">
+    <div class="cart-item" *ngFor="let item of cartItems">
+        <h3>{{item.name}}</h3>
+        <h5>{{ item.price | currency:'ZAR' }}</h5>
+        <a (click)="removeFromCart(item)">Remove Item</a>
+    </div>
+
+    <form [formGroup] = "checkoutForm" (ngSubmit)="purchaseItems()">
+        <h3>Shipping Information</h3>
+        <div>
+            <label> Full name:</label>
+            <input type="text" formControlName = "fullName">
+        </div>
+
+        <div>
+            <label>Address Line 1:</label>
+            <input type="text" formControlName = "addressLine1">
+        </div>
+
+        <div>
+            <label>Address Line 2:</label>
+            <input type="text" formControlName = "addressLine2">
+        </div>
+
+        <div>
+            <label>Zip Code: </label>
+            <input type="number" formControlName = "zipCode">
+        </div>
+        <button type="submit" [disabled] = "!checkoutForm.valid">
+            Purchase Items
+        </button>
+    </form> 
+</ng-container>
+<ng-template #elseTemplate>
+   <h3>You have nothing in your cart at the moment</h3> 
+</ng-template>
+

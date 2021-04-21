@@ -6,7 +6,7 @@ export interface Product {
     quantity_available: number;
 }
 
-export interface Purchases {
+export interface Purchase {
     fullName: string;
     addressLine1: string;
     addressLine2: string;
